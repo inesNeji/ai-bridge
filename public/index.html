@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Bridge by Ines — Learn. Build. Solve.</title>
+<meta name="description" content="1-to-1 online sessions and a free learning path in Python, AI, machine learning, computer vision and LLMs.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{
+  --bg:#FBF7F3; --paper:#FFFFFF; --ink:#1F2A44; --muted:#5E6679; --line:#E8DED8;
+  --blush:#F5E1E1; --rose:#D0808A; --sage:#5F7D6E; --sage-ink:#FFFFFF; --sage-soft:#E4ECE7;
+  --code:#F2ECE7; --good:#3E7D5C; --bad:#B4493F; --good-soft:#E3F0E8; --bad-soft:#F7E3E0;
+  --sky1:#F7D9C4; --sky2:#F4E7E1; --sky3:#DDE6EC; --water1:#C9D6DF; --water2:#E9E1DC; --hill:#9FB0BE; --sun:#FBE3B8;
+  --hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+  --sans:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141A26; --paper:#1B2332; --ink:#EEE9E6; --muted:#A8ADBD; --line:#2C3547;
+    --blush:#3A2A33; --rose:#E3A2AA; --sage:#8FB09F; --sage-ink:#141A26; --sage-soft:#223229;
+    --code:#232C3C; --good:#6CC296; --bad:#E8877C; --good-soft:#1D3328; --bad-soft:#3B2224;
+    --sky1:#3B3350; --sky2:#2A2F45; --sky3:#1E2738; --water1:#1E2838; --water2:#2D2A3A; --hill:#34405A; --sun:#E7B98A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141A26; --paper:#1B2332; --ink:#EEE9E6; --muted:#A8ADBD; --line:#2C3547;
+  --blush:#3A2A33; --rose:#E3A2AA; --sage:#8FB09F; --sage-ink:#141A26; --sage-soft:#223229;
+  --code:#232C3C; --good:#6CC296; --bad:#E8877C; --good-soft:#1D3328; --bad-soft:#3B2224;
+  --sky1:#3B3350; --sky2:#2A2F45; --sky3:#1E2738; --water1:#1E2838; --water2:#2D2A3A; --hill:#34405A; --sun:#E7B98A;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 var(--sans)}
+a{color:inherit}
+button,select,textarea,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px;border-radius:4px}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.hand{font-family:var(--hand);font-weight:700}
+
+/* Header */
+.top{position:sticky;top:0;z-index:25;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+.top .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.logo{font-family:var(--hand);font-weight:700;font-size:28px;text-decoration:none;white-space:nowrap;line-height:1}
+.logo small{font-size:.72em;font-weight:600}
+.menu{display:flex;gap:4px;margin-left:auto;align-items:center}
+.menu a{text-decoration:none;font-weight:700;font-size:15px;padding:8px 12px;border-radius:99px}
+.menu a:hover,.menu a[aria-current="page"]{background:var(--blush)}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;border-radius:99px;padding:11px 22px;font-weight:800;border:2px solid transparent;font-size:15.5px;line-height:1.2}
+.btn-sage{background:var(--sage);color:var(--sage-ink)}
+.btn-sage:hover{filter:brightness(1.07)}
+.btn-line{border-color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--paper)}
+.btn-small{padding:7px 14px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+
+/* Hero scene */
+.scene{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 42%,var(--sky3) 62%,var(--water1) 63%,var(--water2) 100%)}
+.scene::before{content:"";position:absolute;right:12%;top:46%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--sun) 0%,color-mix(in srgb,var(--sun) 40%,transparent) 35%,transparent 70%);transform:translateY(-50%)}
+.scene svg.hills{position:absolute;left:0;right:0;top:calc(63% - 38px);width:100%;height:40px}
+.scene .glints{position:absolute;right:10%;top:66%;width:220px;height:80px;background:repeating-linear-gradient(180deg,color-mix(in srgb,var(--sun) 70%,transparent) 0 2px,transparent 2px 11px);mask:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 70%);-webkit-mask:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 70%);opacity:.7}
+.hero{position:relative;padding:clamp(56px,9vw,110px) 0 clamp(70px,10vw,120px);text-align:center}
+.hero h1{font-family:var(--hand);font-weight:700;font-size:clamp(64px,11vw,120px);line-height:.9;margin:0;letter-spacing:-.01em}
+.hero h1 .by{display:block;font-size:.55em;margin-top:.1em}
+.brush{display:block;margin:6px auto 0;width:min(260px,60%)}
+.tagline{font-size:clamp(20px,2.6vw,26px);font-weight:600;margin:22px 0 10px;letter-spacing:.02em}
+.hero p.lead{max-width:36rem;margin:0 auto 30px;font-size:18px;color:var(--ink)}
+.hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* Sections */
+section.block{padding:clamp(56px,8vw,96px) 0}
+.block h2{font-family:var(--hand);font-weight:700;font-size:clamp(40px,5vw,54px);line-height:1;margin:0 0 28px}
+.bubbles{display:grid;gap:18px;max-width:720px}
+.bubble{display:flex;gap:16px;align-items:flex-start;background:var(--blush);padding:18px 24px;border-radius:26px 14px 30px 12px / 14px 30px 12px 26px;font-size:18px}
+.bubble:nth-child(2){margin-left:clamp(0px,6vw,70px);border-radius:14px 30px 12px 26px / 26px 12px 30px 14px}
+.bubble svg{flex:none;margin-top:2px}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:26px 34px}
+.topic{display:flex;gap:14px;align-items:center;font-weight:700;font-size:17px}
+.icon{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--sage-soft);color:var(--sage)}
+.topic:nth-child(even) .icon{background:var(--blush);color:var(--rose)}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-top:54px}
+.steps li::before{content:counter(s);position:absolute;top:0;left:0;font-family:var(--hand);font-weight:700;font-size:48px;line-height:1;color:var(--rose)}
+.steps h3{margin:0 0 6px;font-size:19px}
+.steps p{margin:0;color:var(--muted)}
+.band{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(28px,5vw,64px);align-items:center}
+.about{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,4vw,44px);align-items:start;max-width:860px}
+.avatar{width:clamp(110px,16vw,160px);aspect-ratio:1;border-radius:50%;background:var(--sage);color:var(--sage-ink);display:grid;place-items:center;font-family:var(--hand);font-size:56px;font-weight:700;object-fit:cover}
+.about p{margin:0 0 14px;max-width:62ch}
+.quote{text-align:center;padding:clamp(60px,9vw,100px) 0}
+.quote p.hand{font-size:clamp(30px,4.2vw,44px);line-height:1.2;margin:0 auto 26px;max-width:22ch;background:linear-gradient(transparent 58%,var(--blush) 58%,var(--blush) 92%,transparent 92%);display:inline;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.quote .after{margin-top:34px}
+.quote small{display:block;margin-top:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:30px 0 40px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+footer nav{display:flex;gap:18px}
+
+/* Learning path */
+.learn-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+body.with-tutor .learn-layout{grid-template-columns:minmax(0,1fr) 360px}
+.learn-main{padding:clamp(28px,5vw,56px) clamp(18px,4vw,48px) 90px;min-width:0}
+.learn-inner{max-width:760px}
+.learn-inner.wide{max-width:980px}
+.eyebrowless h1{font-family:var(--hand);font-weight:700;font-size:clamp(44px,6vw,64px);line-height:1;margin:0 0 12px}
+.muted{color:var(--muted)}
+.bigpath{margin:28px 0 8px;display:flex;align-items:center;overflow-x:auto;padding:8px 2px}
+.bigpath .seg{height:3px;flex:1 1 18px;min-width:12px;background:var(--line)}
+.bigpath .seg.on{background:var(--sage)}
+.bigpath .dot{flex:none;width:16px;height:16px;border-radius:50%;border:3px solid var(--line);background:var(--bg)}
+.bigpath .dot.on{background:var(--sage);border-color:var(--sage)}
+.bigpath .dot.next{border-color:var(--rose);box-shadow:0 0 0 4px var(--blush)}
+.stats{display:flex;flex-wrap:wrap;gap:6px 28px;color:var(--muted);font-size:15px;margin-bottom:28px}
+.stats b{color:var(--ink);font-size:21px;margin-right:4px}
+.continue{display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;background:var(--blush);padding:18px 22px;border-radius:18px;margin-bottom:40px}
+.continue small{display:block;color:var(--muted)}
+.continue strong{font-size:18px}
+.courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.course{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.course h3{margin:0;font-size:19px}
+.course .who{font-size:13.5px;color:var(--sage);font-weight:800}
+.course p{margin:0;color:var(--muted);font-size:15px;flex:1}
+.course .btn{align-self:flex-start}
+.minipath{display:flex;gap:6px;align-items:center}
+.minipath i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.minipath i.on{background:var(--sage)}
+.minipath span{margin-left:6px;font-size:13px;color:var(--muted)}
+.lesson-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px}
+.lesson-list button{background:none;border:0;padding:4px 0;display:flex;gap:10px;align-items:center;text-align:left;font-size:15px}
+.lesson-list button:hover span:last-child{text-decoration:underline}
+.lnode{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);flex:none}
+.lnode.on{background:var(--sage);border-color:var(--sage)}
+
+.crumb{font-size:14.5px;color:var(--muted);margin-bottom:8px}
+.crumb a{color:var(--sage);font-weight:800;text-decoration:none}
+.lesson h1{font-size:clamp(30px,4vw,42px);line-height:1.12;margin:0 0 6px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14.5px;margin-bottom:26px}
+.prose{font-size:17.5px;line-height:1.7}
+.prose h3{font-size:19px;margin:30px 0 6px}
+.prose p{margin:0 0 16px}
+.prose code{font-family:var(--mono);font-size:.84em;background:var(--code);padding:1px 5px;border-radius:4px}
+pre{background:var(--code);border-radius:12px;padding:14px 16px;overflow-x:auto;font:14px/1.55 var(--mono);margin:0 0 18px}
+pre code{background:none!important;padding:0!important;font-size:inherit!important}
+.quiz{margin-top:44px;padding-top:6px}
+.quiz h2{font-family:var(--hand);font-weight:700;font-size:40px;margin:0;line-height:1}
+.quiz .hint{color:var(--muted);margin:6px 0 20px;font-size:15px}
+.q{margin-bottom:26px}
+.q .qtext{font-weight:800;margin-bottom:10px}
+.tag{display:inline-block;font-size:12px;font-weight:800;color:var(--rose);border:1.5px solid var(--rose);border-radius:99px;padding:0 8px;margin-left:8px;vertical-align:2px}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 14px}
+.opt:hover:not(:disabled){border-color:var(--sage)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.explain{margin-top:10px;font-size:15px;padding:10px 14px;border-radius:12px;background:var(--sage-soft)}
+.explain b.ok{color:var(--good)} .explain b.no{color:var(--bad)}
+.score{font-weight:800;margin:4px 0 20px}
+.gen-status{font-size:14.5px;color:var(--muted);margin-left:10px}
+.lesson-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:34px;padding-top:20px;border-top:1px solid var(--line)}
+.session-nudge{margin-top:36px;padding:18px 22px;border-radius:18px;border:2px dashed var(--rose);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.session-nudge p{margin:0;max-width:44ch}
+
+/* Tutor */
+.tutor{display:none;background:var(--paper);border-left:1px solid var(--line);flex-direction:column;position:sticky;top:calc(65px + env(safe-area-inset-top,0px));height:calc(100vh - 65px - env(safe-area-inset-top,0px));height:calc(100dvh - 65px - env(safe-area-inset-top,0px))}
+body.with-tutor .tutor{display:flex}
+.tutor-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tutor-head h2{margin:0;font-family:var(--hand);font-size:28px;line-height:1;flex:1 1 100%;white-space:nowrap}
+.tutor-head select{background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:5px 10px;font-size:13.5px}
+.ctx{width:100%;font-size:13.5px;color:var(--muted)}
+.ctx b{color:var(--ink)}
+.msgs{flex:1;min-height:0;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:92%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.55;overflow-wrap:anywhere}
+.msg.user{align-self:flex-end;background:var(--sage);color:var(--sage-ink);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--bg);border-bottom-left-radius:4px}
+.msg.bot pre{font-size:13px;padding:10px;margin:8px 0}
+.msg.bot code{font-family:var(--mono);font-size:.88em}
+.msg.note{align-self:stretch;max-width:none;background:none;color:var(--muted);font-size:13.5px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.chip{background:none;border:1.5px solid var(--line);border-radius:99px;padding:5px 11px;font-size:13.5px}
+.chip:hover{border-color:var(--rose);color:var(--rose)}
+.composer{border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:8px;align-items:flex-end}
+.composer textarea{flex:1;resize:none;min-height:44px;max-height:140px;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--bg);font-size:15px}
+.tutor-fab{display:none}
+.backdrop{display:none}
+.ghost{background:none;border:1.5px solid var(--line);border-radius:99px;padding:5px 12px;font-weight:700;font-size:13.5px}
+.ghost:hover{border-color:var(--sage)}
+
+/* Python editor */
+.pg{max-width:980px}
+.pg h1{font-family:var(--hand);font-weight:700;font-size:clamp(44px,6vw,60px);line-height:1;margin:0 0 8px}
+.pg-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 10px}
+.pg-bar select{background:var(--paper);border:1.5px solid var(--line);border-radius:99px;padding:7px 12px;font-size:14.5px}
+.pg-bar .spacer{flex:1}
+.kbd{font-size:13px;color:var(--muted)}
+.editor{display:flex;border:1.5px solid var(--line);border-radius:14px;background:var(--code);overflow:hidden;min-height:260px}
+.editor:focus-within{border-color:var(--sage)}
+.gutter{flex:none;padding:14px 8px 14px 12px;text-align:right;font:14px/1.6 var(--mono);color:var(--muted);user-select:none;overflow:hidden;white-space:pre;opacity:.7}
+.editor textarea{flex:1;border:0;outline:0;resize:vertical;background:transparent;padding:14px 14px 14px 6px;font:14px/1.6 var(--mono);color:var(--ink);min-height:260px;white-space:pre;overflow:auto;tab-size:4}
+.output{margin-top:14px;border-radius:14px;background:#1F2A44;color:#E9EDF5;font:13.5px/1.55 var(--mono);padding:14px 16px;min-height:120px;max-height:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.output .err{color:#FFB4A9}
+.output .sys{color:#A9B6CC;font-style:italic}
+.output .btn{font-family:var(--sans)}
+.out-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.runbar{display:flex;justify-content:flex-end;margin:-8px 0 18px}
+.files-note{font-size:14px;color:var(--muted);margin-top:12px}
+
+/* Legal */
+.legal{max-width:720px}
+.legal h1{font-size:34px;margin:0 0 20px}
+.legal h2{font-size:20px;margin:28px 0 8px}
+.legal p{margin:0 0 12px}
+.template-note{background:var(--blush);border-radius:12px;padding:12px 16px;font-size:14.5px;margin-bottom:24px}
+
+@media (max-width:1020px){
+  body.with-tutor .learn-layout{grid-template-columns:minmax(0,1fr)}
+  body.with-tutor .tutor{display:flex;position:fixed;top:0;right:0;bottom:0;height:auto;width:min(420px,100%);z-index:40;transform:translateX(100%);transition:transform .2s ease;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:-10px 0 30px rgba(0,0,0,.18)}
+  body.show-tutor .tutor{transform:none}
+  body.with-tutor .tutor-fab{display:inline-flex;position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+  body.show-tutor .backdrop{display:block;position:fixed;inset:0;background:rgba(20,26,38,.4);z-index:35}
+  .close-tutor{display:inline-block!important}
+}
+@media (max-width:720px){
+  .menu a.hide-sm{display:none}
+  .split,.about{grid-template-columns:minmax(0,1fr)}
+  .logo small{display:none}
+}
+.close-tutor{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#/">AI Bridge <small>by Ines</small></a>
+    <nav class="menu" aria-label="Main">
+      <a href="#/" data-nav="home" class="hide-sm">Sessions</a>
+      <a href="#/learn" data-nav="learn">Learning path</a>
+      <a href="#/editor" data-nav="editor" class="hide-sm">Python editor</a>
+      <a class="btn btn-sage btn-small" data-book href="#">Book a session</a>
+    </nav>
+  </div>
+</header>
+
+<div class="learn-layout">
+  <main id="view" tabindex="-1"></main>
+  <aside class="tutor" id="tutor" aria-label="AI tutor">
+    <div class="tutor-head">
+      <h2>Ask the tutor</h2>
+      <label for="level" style="position:absolute;left:-9999px">Explain for</label>
+      <select id="level">
+        <option value="beginner">New to this</option>
+        <option value="student" selected>Student</option>
+        <option value="researcher">Researcher</option>
+      </select>
+      <button class="ghost" id="clearChat" type="button">New chat</button>
+      <button class="ghost close-tutor" id="closeTutor" type="button">Close</button>
+      <div class="ctx" id="ctx"></div>
+    </div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="chips" id="chips"></div>
+    <div class="composer" id="composer">
+      <textarea id="input" rows="1" placeholder="Ask about this lesson…" aria-label="Your question"></textarea>
+      <button class="btn btn-sage btn-small" id="sendBtn" type="button">Send</button>
+      <button class="ghost" id="stopBtn" type="button" hidden>Stop</button>
+    </div>
+  </aside>
+</div>
+<button class="btn btn-sage tutor-fab" id="tutorFab" type="button" aria-controls="tutor">Ask the tutor</button>
+<div class="backdrop" id="backdrop"></div>
+
+<script>
+/* =====================================================================
+   EDIT HERE — your personal settings
+   ===================================================================== */
+const CONFIG = {
+  bookingUrl: "https://cal.com/ines-neji-dva4p1/30min",   // your Cal.com or Calendly link
+  contactEmail: "nejiines1997@gmail.com",             // shown on the page and in the Impressum
+  photo: "inespic.png",                                     // e.g. "ines.jpg" (put the file next to index.html)
+  tutorEndpoint: "/api/tutor",                   // the Cloudflare function (don't change)
+  pyodideUrl: "https://cdn.jsdelivr.net/pyodide/v0.29.5/full/", // Python runtime for the editor (see README to self-host)
+  showLegalTemplateNote: true                    // set to false once the legal pages are filled in
+};
+
+const ABOUT = [
+  "I am Ines Neji, a Computer Science researcher passionate about turning Artificial Intelligence into practical solutions for real-world challenges. My research lies at the intersection of AI, Computer Vision, IoT, and Digital Twins, with a focus on smart agriculture and intelligent environmental systems. I am particularly interested in combining deep learning, sensor data, remote sensing, and explainable AI to create systems that are not only accurate, but also understandable and useful for people. More recently, my interests have expanded toward Large Language Models, RAG, and AI-driven intelligent systems.",
+  "I started AI Bridge because I remember how much faster I learned when someone sat down with my actual code and my actual question. That's what these sessions are: we look at your problem together until you know how to move forward."
+];
+
+const LEGAL = {
+  name: "[Ines Neji]",
+  
+};
+
+/* =====================================================================
+   Courses — add or edit lessons here
+   ===================================================================== */
+const COURSES = [
+{ id:"py", title:"Python for research", who:"Everyone", summary:"The Python you need to load, clean and summarise data. No prior coding required.",
+  lessons:[
+  { id:"py1", title:"Variables and data types", min:8, body:`
+<p>Python keeps values in named variables. You never declare a type up front; Python works it out from the value you assign.</p>
+<pre data-run><code>sample_id = "OL-042"    # str  (text)
+n_images  = 1280        # int  (whole number)
+accuracy  = 0.913       # float (decimal)
+is_labeled = True       # bool (True / False)
+
+print(type(sample_id), type(accuracy))
+print("3" + "4", 3 + 4)</code></pre>
+<p>Use <code>type(x)</code> to check what a value is. Types matter because operations depend on them: <code>3 + 4</code> gives <code>7</code>, but <code>"3" + "4"</code> joins two strings and gives <code>"34"</code>.</p>
+<h3>Converting between types</h3>
+<p>Data read from files or forms usually arrives as text. Convert it explicitly with <code>int()</code>, <code>float()</code> or <code>str()</code> before calculating. <code>int("0.5")</code> fails because the text is not a whole number; use <code>float("0.5")</code> instead.</p>`,
+    quiz:[
+      {q:'What does "3" + "4" evaluate to in Python?', o:['7','"34"','An error','3.4'], a:1, e:'Both values are strings, so + joins them into "34".'},
+      {q:'Which call turns the text "0.5" into a number?', o:['int("0.5")','float("0.5")','str(0.5)','bool("0.5")'], a:1, e:'float() parses decimal text. int("0.5") raises a ValueError.'}
+    ]},
+  { id:"py2", title:"Lists, loops and functions", min:10, body:`
+<p>A <strong>list</strong> holds several values in order. A <strong>for loop</strong> repeats code for each item, and a <strong>function</strong> packages steps you want to reuse.</p>
+<pre data-run><code>weights = [3.2, 4.1, 2.8, 5.0]
+
+def mean(values):
+    return sum(values) / len(values)
+
+for w in weights:
+    print(w, "g")
+
+print("mean:", mean(weights))</code></pre>
+<p><code>len()</code> counts items and <code>sum()</code> adds them. Inside a function, <code>return</code> hands the result back to the caller; without it the function returns <code>None</code>.</p>
+<h3>List comprehensions</h3>
+<p>A compact way to build a new list from an old one: <code>heavy = [w for w in weights if w &gt; 4]</code> keeps only values above 4.</p>`,
+    quiz:[
+      {q:'What is len([2, 4, 6])?', o:['2','3','6','12'], a:1, e:'len counts items: there are three.'},
+      {q:'A function has no return statement. What does calling it give back?', o:['0','An empty list','None','An error'], a:2, e:'Python functions return None when they end without return.'}
+    ]},
+  { id:"py3", title:"Tabular data with pandas", min:12, body:`
+<p><strong>pandas</strong> represents a table as a <code>DataFrame</code>: rows are observations, columns are variables. It is the everyday tool for CSV and Excel data.</p>
+<pre data-run><code>import pandas as pd
+
+df = pd.read_csv("olives.csv")
+print(df.head())                                   # first 5 rows
+print(df["variety"].value_counts())                # rows per variety
+print(df.groupby("variety")["weight_g"].mean())    # mean weight per variety
+heavy = df[df["weight_g"] > 4]                     # filter rows
+print(len(heavy), "olives heavier than 4 g")</code></pre>
+<p>The editor includes a small sample file, <code>olives.csv</code>, so you can run this code as it is. Always look at the data first with <code>head()</code>, <code>info()</code> and <code>describe()</code>. They show column types, missing values and value ranges before you trust any result.</p>
+<h3>Split, apply, combine</h3>
+<p><code>groupby</code> splits rows into groups, applies a calculation to each group and combines the results into a new table. Most summary statistics in a paper come from this pattern.</p>`,
+    quiz:[
+      {q:'Which method shows the first rows of a DataFrame?', o:['df.first()','df.head()','df.top()','df.show()'], a:1, e:'head() returns the first 5 rows by default.'},
+      {q:'What does df.groupby("variety")["weight_g"].mean() produce?', o:['The overall mean weight','The mean weight for each variety','The number of varieties','A sorted DataFrame'], a:1, e:'groupby splits by variety, then the mean is computed per group.'}
+    ]}
+  ]},
+{ id:"ml", title:"Machine learning basics", who:"Students and researchers", summary:"How to split your data honestly and recognise when a model has only memorised it.",
+  lessons:[
+  { id:"ml1", title:"Training, validation and test data", min:9, body:`
+<p>A model is only useful if it works on data it has never seen. So we split the data into three roles:</p>
+<p><strong>Training data</strong> is what the model learns from. <strong>Validation data</strong> is used to compare settings (learning rate, model size, number of epochs). <strong>Test data</strong> is touched once, at the very end, to report how well the final model generalises.</p>
+<pre><code>from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42)</code></pre>
+<p><code>stratify=y</code> keeps class proportions equal in both parts, which matters when some classes are rare.</p>
+<h3>Data leakage</h3>
+<p>Leakage happens when information from the test set sneaks into training, and it makes results look better than they are. A classic case in medical imaging: several images from the same patient end up in both training and test sets. Split by patient (for example with <code>GroupShuffleSplit</code>), not by image.</p>`,
+    quiz:[
+      {q:'Which part of the data should you use to choose hyperparameters?', o:['Training set','Validation set','Test set','All of it'], a:1, e:'The validation set compares settings; the test set stays untouched until the end.'},
+      {q:'Which of these is data leakage?', o:['Using stratify=y','Images of the same patient in both training and test sets','A test set of 20%','Setting random_state'], a:1, e:'The model can recognise the patient rather than the condition, inflating test scores.'}
+    ]},
+  { id:"ml2", title:"Overfitting and how to spot it", min:9, body:`
+<p>A model <strong>overfits</strong> when it memorises the training data, including its noise, instead of learning patterns that generalise. The tell-tale sign is in the learning curves: training loss keeps falling while validation loss stops improving and starts to rise.</p>
+<p>The opposite, <strong>underfitting</strong>, shows as high error on both training and validation data: the model is too simple or hasn't trained long enough.</p>
+<h3>What helps</h3>
+<p>More or more varied data is the strongest remedy; for images, <strong>data augmentation</strong> (flips, crops, colour changes) creates variety cheaply. Regularisation such as dropout or weight decay, a smaller model, and <strong>early stopping</strong> (keep the checkpoint with the best validation loss) all reduce overfitting too.</p>`,
+    quiz:[
+      {q:'Training loss falls, validation loss rises. What is happening?', o:['Underfitting','Overfitting','Data augmentation','Normal convergence'], a:1, e:'The model is fitting the training data at the expense of generalisation.'},
+      {q:'What does early stopping do?', o:['Stops training after one epoch','Keeps the model from the epoch with the best validation performance','Removes noisy data','Lowers the learning rate'], a:1, e:'It monitors validation loss and keeps the best checkpoint.'}
+    ]}
+  ]},
+{ id:"cv", title:"Computer vision foundations", who:"Students and researchers", summary:"From pixels to object detectors: how CNNs and YOLO see images.",
+  lessons:[
+  { id:"cv1", title:"How computers see images", min:8, body:`
+<p>To a computer, an image is a grid of numbers. A colour image has three <strong>channels</strong> (red, green and blue), and each pixel stores one value per channel, usually between 0 and 255.</p>
+<pre><code>import numpy as np
+from PIL import Image
+
+img = np.array(Image.open("leaf.jpg"))
+img.shape     # (480, 640, 3) → height, width, channels
+img[0, 0]     # top-left pixel, e.g. [34, 120, 51]</code></pre>
+<p>Note the order: NumPy stores <strong>height first</strong>, then width. A 640×480 photo therefore has shape <code>(480, 640, 3)</code>.</p>
+<h3>Normalisation</h3>
+<p>Before training, pixel values are scaled, for example to 0–1 by dividing by 255, or standardised per channel. Neural networks train faster and more stably when their inputs sit in a small, consistent range.</p>`,
+    quiz:[
+      {q:'A 640×480 RGB image is loaded with NumPy. What is its shape?', o:['(640, 480, 3)','(480, 640, 3)','(3, 640, 480)','(480, 640)'], a:1, e:'NumPy arrays are height × width × channels.'},
+      {q:'Why are pixel values usually normalised before training?', o:['To make images smaller on disk','To remove colour','Networks train more stably with small, consistent input ranges','JPEG requires it'], a:2, e:'Scaled inputs keep gradients well behaved.'}
+    ]},
+  { id:"cv2", title:"Convolutions and CNNs", min:10, body:`
+<p>A <strong>convolution</strong> slides a small grid of weights, the <em>kernel</em>, across the image. At each position it multiplies and sums the pixels beneath it, producing a <strong>feature map</strong> that lights up where a pattern appears.</p>
+<p>A convolutional neural network (CNN) stacks many such layers. Early layers learn simple patterns like edges and colour blobs; deeper layers combine them into textures, parts and whole objects. The kernels are not designed by hand; they are learned from labelled examples.</p>
+<h3>Pooling and depth</h3>
+<p><strong>Pooling</strong> layers shrink feature maps, for example by keeping the maximum of each 2×2 block. This makes the network cheaper and more tolerant of small shifts. As maps get smaller, the number of channels usually grows, trading spatial detail for richer features.</p>`,
+    quiz:[
+      {q:'What do early CNN layers typically learn to detect?', o:['Whole objects','Edges and simple textures','Class labels','Bounding boxes'], a:1, e:'Low-level patterns come first; deeper layers compose them.'},
+      {q:'What does 2×2 max pooling do to a feature map?', o:['Doubles its size','Keeps the largest value in each 2×2 block, halving width and height','Adds colour channels','Normalises it to 0–1'], a:1, e:'Max pooling downsamples by keeping the strongest response.'}
+    ]},
+  { id:"cv3", title:"Object detection and YOLO", min:12, body:`
+<p><strong>Classification</strong> answers "what is in this image?". <strong>Detection</strong> also answers "where?", returning a bounding box, a class and a confidence score for every object.</p>
+<p>YOLO ("You Only Look Once") predicts all boxes in a single forward pass of the network, which makes it fast enough for video and embedded devices.</p>
+<h3>IoU and non-maximum suppression</h3>
+<p><strong>Intersection over Union</strong> measures how well two boxes overlap: the shared area divided by the combined area. Identical boxes have IoU = 1, separate boxes 0. A detector often proposes several overlapping boxes for one object; <strong>non-maximum suppression</strong> keeps the most confident box and removes the others that overlap it strongly.</p>`,
+    quiz:[
+      {q:'What is the IoU of two identical boxes?', o:['0','0.5','1','Undefined'], a:2, e:'Intersection equals union, so the ratio is 1.'},
+      {q:'What is non-maximum suppression for?', o:['Speeding up training','Removing duplicate overlapping boxes for the same object','Increasing image resolution','Balancing classes'], a:1, e:'NMS keeps the best box and drops strongly overlapping ones.'}
+    ]}
+  ]},
+{ id:"llm", title:"GenAI and LLMs", who:"Everyone curious about LLMs", summary:"What large language models actually do, and how to get reliable answers from them.",
+  lessons:[
+  { id:"llm1", title:"What a language model actually does", min:8, body:`
+<p>A large language model (LLM) reads text as <strong>tokens</strong>, small pieces of words, and is trained to predict the next token. Everything it writes is produced one token at a time, each chosen based on all the tokens before it.</p>
+<p>The <strong>context window</strong> is how much text the model can consider at once: your instructions, any documents you paste and the conversation so far. Whatever falls outside it, the model simply doesn't see.</p>
+<h3>Why models "hallucinate"</h3>
+<p>Because the model generates plausible continuations, it can produce fluent text that is wrong, such as an invented citation. It doesn't look facts up unless you give it the source. Settings like <strong>temperature</strong> control how adventurous the token choices are: low values give more predictable answers, higher values more varied ones.</p>`,
+    quiz:[
+      {q:'What is an LLM fundamentally trained to do?', o:['Search the internet','Predict the next token','Store a database of facts','Translate code to text'], a:1, e:'Next-token prediction is the core training objective.'},
+      {q:'Why can an LLM invent a citation?', o:['It is lying on purpose','It generates plausible text without checking a source','Its context window is too big','Temperature is set to zero'], a:1, e:'Fluent, plausible output is not the same as verified output.'}
+    ]},
+  { id:"llm2", title:"Prompting and retrieval (RAG)", min:10, body:`
+<p>Good prompts are specific: say what you want, who it's for, what format to use, and give an example when the format matters. Treat the model like a capable colleague who knows nothing about your project.</p>
+<pre><code>Summarise the methods section below for a first-year student.
+Use at most 5 bullet points and explain any abbreviation.
+
+"""
+&lt;paste the text here&gt;
+"""</code></pre>
+<h3>Retrieval-augmented generation</h3>
+<p><strong>RAG</strong> lets a model answer from your own documents. The documents are split into chunks and turned into <strong>embeddings</strong> (vectors that capture meaning). For each question, the most similar chunks are retrieved and put into the prompt, so the model answers from real sources and can cite them.</p>
+<p>Use RAG when the knowledge changes or lives in your documents. Fine-tuning is better suited to teaching a model a style or a narrow, repeated task.</p>`,
+    quiz:[
+      {q:'In RAG, what are embeddings used for?', o:['Compressing images','Finding the text chunks most similar to the question','Training the model from scratch','Setting the temperature'], a:1, e:'Similarity between embeddings selects which chunks go into the prompt.'},
+      {q:'Your lab handbook changes every month and you want a Q&A assistant. What fits best?', o:['Fine-tuning every month','RAG over the current handbook','A higher temperature','A longer prompt without the handbook'], a:1, e:'RAG uses the latest documents at question time without retraining.'}
+    ]}
+  ]}
+];
+const ALL = COURSES.flatMap(c => c.lessons.map(l => ({...l, course:c})));
+const byId = Object.fromEntries(ALL.map(l => [l.id, l]));
+
+/* =====================================================================
+   Progress (saved in the visitor's browser)
+   ===================================================================== */
+const LS_KEY = "aibridge-progress-v1";
+let progress = { lessons:{}, last:null };
+try { const raw = localStorage.getItem(LS_KEY); if (raw) progress = Object.assign(progress, JSON.parse(raw)); } catch(e) {}
+function saveProgress(){ try { localStorage.setItem(LS_KEY, JSON.stringify(progress)); } catch(e) {} }
+const answers = {}, extra = {};
+const isDone = id => !!progress.lessons[id]?.done;
+function nextLesson(){
+  if (progress.last && byId[progress.last] && !isDone(progress.last)) return byId[progress.last];
+  return ALL.find(l => !isDone(l.id)) || null;
+}
+
+/* =====================================================================
+   Helpers
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ICONS = {
+  code:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 10l3 2-3 2M12 15h5"/></svg>',
+  net:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="6" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><path d="M7 7l3 4M7 17l3-4M14.2 12h2.6"/></svg>',
+  eye:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  chat:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M12 8.2v4.6M9.7 10.5h4.6"/></svg>',
+  laptop:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 19h20M10 9l-2 2 2 2M14 9l2 2-2 2"/></svg>',
+  search:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>',
+  bulb:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg>',
+  q:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.4"/><circle cx="12" cy="16.8" r=".6" fill="currentColor"/></svg>'
+};
+const BRUSH = '<svg class="brush" viewBox="0 0 260 14" aria-hidden="true"><path d="M4 9 C60 3 150 2 256 6" fill="none" stroke="var(--rose)" stroke-width="5" stroke-linecap="round" opacity=".75"/></svg>';
+
+function bookLink(){ return CONFIG.bookingUrl; }
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-book]");
+  if (a){ e.preventDefault(); window.open(bookLink(), "_blank", "noopener"); }
+});
+
+/* =====================================================================
+   Views
+   ===================================================================== */
+function viewHome(){
+  return `
+  <div class="scene">
+    <svg class="hills" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 L0 30 C120 22 200 12 320 18 C430 24 520 8 640 14 C760 20 840 26 960 20 C1060 15 1130 22 1200 26 L1200 40 Z" fill="var(--hill)" opacity=".55"/></svg>
+    <div class="glints" aria-hidden="true"></div>
+    <div class="wrap hero">
+      <h1>AI Bridge<span class="by">by Ines</span></h1>
+      ${BRUSH}
+      <p class="tagline">Learn • Build • Solve.</p>
+      <p class="lead">1-to-1 online sessions on weekends for anyone working on Python, AI, machine learning, computer vision or software problems. Plus a free learning path to practise in between.</p>
+      <div class="ctas">
+        <a class="btn btn-sage" data-book href="#">Book a session</a>
+        <a class="btn btn-line" href="#/learn">Start learning free</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="block"><div class="wrap">
+    <h2>Sound familiar?</h2>
+    <div class="bubbles">
+      <div class="bubble">${ICONS.bulb}<span>You're working on a technical problem in Python, AI, machine learning, computer vision or software development, and you're stuck.</span></div>
+      <div class="bubble">${ICONS.q}<span>Or you have an idea but aren't sure how to approach it.</span></div>
+    </div>
+  </div></section>
+
+  <section class="block band"><div class="wrap">
+    <h2>We can work through:</h2>
+    <div class="topics">
+      <div class="topic"><span class="icon">${ICONS.code}</span>Python and programming</div>
+      <div class="topic"><span class="icon">${ICONS.net}</span>AI and machine learning</div>
+      <div class="topic"><span class="icon">${ICONS.eye}</span>Computer vision</div>
+      <div class="topic"><span class="icon">${ICONS.chat}</span>GenAI and LLMs</div>
+      <div class="topic"><span class="icon">${ICONS.laptop}</span>Software and technical problems</div>
+      <div class="topic"><span class="icon">${ICONS.search}</span>Research ideas and methodology</div>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2>How a session works</h2>
+    <ol class="steps">
+      <li><h3>Pick a weekend slot</h3><p>Choose a time that suits you in the booking calendar. Sessions are online.</p></li>
+      <li><h3>Tell me what you're working on</h3><p>A few lines about your question, idea or error message, so I can prepare.</p></li>
+      <li><h3>We figure it out together</h3><p>We go through your actual code or plan, and you leave knowing the next step.</p></li>
+    </ol>
+  </div></section>
+
+  <section class="block band"><div class="wrap split">
+    <div>
+      <h2>Free learning path</h2>
+      <p>Short lessons with quizzes in Python, machine learning, computer vision and LLMs. An AI tutor sits next to every lesson, so you can ask questions as you read.</p>
+      <p class="muted">There's also a Python editor that runs right in the browser, no installation needed. Use it all to prepare for a session, or to practise afterwards. Your progress stays in your browser.</p>
+      <div class="ctas" style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-line" href="#/learn">Open the learning path</a><a class="btn btn-line" href="#/editor">Try the Python editor</a></div>
+    </div>
+    <div class="courses">${COURSES.slice(0,4).map(courseCard).join("")}</div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2>About me</h2>
+    <div class="about">
+      ${CONFIG.photo ? `<img class="avatar" src="${esc(CONFIG.photo)}" alt="Ines">` : `<div class="avatar" aria-hidden="true">In</div>`}
+      <div>${ABOUT.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+    </div>
+  </div></section>
+
+  <section class="quote band"><div class="wrap">
+    <p class="hand">You bring the question, idea, or challenge. We figure it out together.</p>
+    <div class="after"><a class="btn btn-sage" data-book href="#">Book a session</a>
+    <small>Tell me a little about what you're working on.</small></div>
+  </div></section>`;
+}
+
+function courseCard(c){
+  const d = c.lessons.filter(l => isDone(l.id)).length;
+  const first = c.lessons.find(l => !isDone(l.id)) || c.lessons[0];
+  return `<article class="course"><span class="who">${esc(c.who)}</span><h3>${esc(c.title)}</h3><p>${esc(c.summary)}</p>
+    <div class="minipath">${c.lessons.map(l=>`<i class="${isDone(l.id)?"on":""}"></i>`).join("")}<span>${d} of ${c.lessons.length}</span></div>
+    <a class="btn btn-line btn-small" href="#/lesson/${first.id}">${d===0?"Start course":d===c.lessons.length?"Review":"Continue"}</a></article>`;
+}
+
+function viewLearn(){
+  const done = ALL.filter(l => isDone(l.id)).length;
+  const sc = Object.values(progress.lessons).filter(v => v.total);
+  const avg = sc.length ? Math.round(100*sc.reduce((s,v)=>s+v.score,0)/sc.reduce((s,v)=>s+v.total,0)) : null;
+  const nxt = nextLesson();
+  let path = "";
+  ALL.forEach((l,i) => {
+    if (i) path += `<span class="seg ${isDone(l.id)?"on":""}"></span>`;
+    path += `<span class="dot ${isDone(l.id)?"on":""} ${nxt&&nxt.id===l.id?"next":""}" title="${esc(l.title)}"></span>`;
+  });
+  return `<div class="learn-main"><div class="learn-inner wide eyebrowless">
+    <h1>${done===0?"Your learning path":done===ALL.length?"Path complete":"Keep going"}</h1>
+    <p class="muted" style="max-width:56ch;margin:0">Short lessons, a quiz after each one, and a tutor that knows which lesson you're reading.</p>
+    <div class="bigpath" aria-hidden="true">${path}</div>
+    <div class="stats"><span><b>${done}</b>of ${ALL.length} lessons done</span><span><b>${avg===null?"–":avg+"%"}</b>quiz average</span><span><a href="#/editor" style="font-weight:800;color:var(--sage)">Open the Python editor</a></span></div>
+    ${nxt ? `<div class="continue"><div><small>${progress.last&&nxt.id===progress.last?"Pick up where you left off":"Next lesson"}</small><strong>${esc(nxt.title)}</strong><small>${esc(nxt.course.title)}, ${nxt.min} min</small></div><a class="btn btn-sage" href="#/lesson/${nxt.id}">Open lesson</a></div>`
+          : `<div class="continue"><div><strong>You've finished every lesson.</strong><small>Ready for your own project? Book a session and bring it along.</small></div><a class="btn btn-sage" data-book href="#">Book a session</a></div>`}
+    <div class="courses">${COURSES.map(c => courseCard(c).replace("</article>", `<ul class="lesson-list">${c.lessons.map(l=>`<li><button type="button" data-go="${l.id}"><span class="lnode ${isDone(l.id)?"on":""}"></span><span>${esc(l.title)}</span></button></li>`).join("")}</ul></article>`)).join("")}</div>
+  </div></div>`;
+}
+
+function qHTML(q, i, chosen, isExtra){
+  const has = chosen !== undefined;
+  return `<div class="q"><div class="qtext">${esc(q.q)}${isExtra?'<span class="tag">Practice</span>':""}</div><div class="opts">${
+    q.o.map((opt,j) => {
+      let cls = "opt";
+      if (has && j === q.a) cls += " right"; else if (has && j === chosen) cls += " wrong";
+      return `<button type="button" class="${cls}" data-q="${i}" data-o="${j}" ${isExtra?"data-extra":""} ${has?"disabled":""}>${esc(opt)}</button>`;
+    }).join("")}</div>${has?`<div class="explain"><b class="${chosen===q.a?"ok":"no"}">${chosen===q.a?"Correct.":"Not quite."}</b> ${esc(q.e)}</div>`:""}</div>`;
+}
+
+function viewLesson(id){
+  const l = byId[id];
+  const idx = ALL.indexOf(l), prev = ALL[idx-1], next = ALL[idx+1];
+  const ans = answers[l.id] || (answers[l.id] = []);
+  const answered = l.quiz.filter((_,i) => ans[i] !== undefined).length;
+  const correct = l.quiz.filter((q,i) => ans[i] === q.a).length;
+  const rec = progress.lessons[l.id] || {};
+  return `<div class="learn-main"><article class="learn-inner lesson">
+    <div class="crumb"><a href="#/learn">Learning path</a> / ${esc(l.course.title)}</div>
+    <h1>${esc(l.title)}</h1>
+    <div class="meta">${l.min} min read${rec.done?", completed":""}</div>
+    <div class="prose">${l.body}</div>
+    <section class="quiz" aria-labelledby="quizTitle">
+      <h2 id="quizTitle">Check your understanding</h2>
+      <p class="hint">Pick an answer to see the explanation.</p>
+      ${l.quiz.map((q,i) => qHTML(q,i,ans[i],false)).join("")}
+      ${answered===l.quiz.length?`<p class="score">You got ${correct} of ${l.quiz.length} right.</p>`:""}
+      ${(extra[l.id]||[]).map((q,i) => qHTML(q,i,q.chosen,true)).join("")}
+      <div><button class="btn btn-line btn-small" type="button" id="genQ">Practice question from the tutor</button><span class="gen-status" id="genStatus" role="status"></span></div>
+    </section>
+    <div class="lesson-foot">
+      ${prev?`<a class="btn btn-line btn-small" href="#/lesson/${prev.id}">Previous</a>`:`<span></span>`}
+      <button class="btn btn-sage btn-small" type="button" id="markDone">${rec.done?"Mark as not done":"Mark lesson complete"}</button>
+      ${next?`<a class="btn btn-line btn-small" href="#/lesson/${next.id}">Next lesson</a>`:`<a class="btn btn-line btn-small" href="#/learn">Back to the path</a>`}
+    </div>
+    <div class="session-nudge"><p><strong>Working on something similar in your own project?</strong> Bring it to a 1-to-1 session and we'll go through it together.</p><a class="btn btn-sage btn-small" data-book href="#">Book a session</a></div>
+  </article></div>`;
+}
+
+function viewLegal(which){
+  const note = CONFIG.showLegalTemplateNote ? `<div class="template-note">Vorlage: Bitte die Platzhalter in eckigen Klammern ausfüllen und den Text prüfen lassen, bevor die Seite öffentlich geht. Danach in CONFIG <code>showLegalTemplateNote</code> auf <code>false</code> setzen.</div>` : "";
+  if (which === "impressum") return `<div class="learn-main"><div class="learn-inner legal" lang="de">${note}
+    <h1>Impressum</h1>
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>${LEGAL.name}<br>AI Bridge by Ines<br>${LEGAL.address}</p>
+    <h2>Kontakt</h2>
+    <p>E-Mail: ${esc(LEGAL.email)}</p>
+    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>${LEGAL.name}, Anschrift wie oben</p>
+    <h2>Haftung für Inhalte und Links</h2>
+    <p>Die Inhalte dieser Seite wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität, insbesondere von Antworten des KI-Tutors, kann keine Gewähr übernommen werden. Für Inhalte externer Links sind ausschließlich deren Betreiber verantwortlich.</p>
+  </div></div>`;
+  return `<div class="learn-main"><div class="learn-inner legal" lang="de">${note}
+    <h1>Datenschutzerklärung</h1>
+    <h2>1. Verantwortliche</h2>
+    <p>${LEGAL.name}, ${LEGAL.address.replace(/<br>/g, ", ")}, E-Mail: ${esc(LEGAL.email)}</p>
+    <h2>2. Hosting</h2>
+    <p>Diese Website wird bei Cloudflare, Inc. (USA) gehostet. Beim Aufruf verarbeitet Cloudflare technisch notwendige Daten wie IP-Adresse, Zeitpunkt und angefragte Seite, um die Website auszuliefern und vor Missbrauch zu schützen (Art. 6 Abs. 1 lit. f DSGVO). [Hinweis zum Datentransfer in die USA / EU-US Data Privacy Framework ergänzen.]</p>
+    <h2>3. Lernfortschritt</h2>
+    <p>Ihr Lernfortschritt wird ausschließlich lokal in Ihrem Browser (localStorage) gespeichert und nicht an uns übertragen. Sie können ihn jederzeit über die Browsereinstellungen löschen.</p>
+    <h2>4. KI-Tutor</h2>
+    <p>Wenn Sie den KI-Tutor nutzen, werden Ihre Frage und der Text der aktuellen Lektion an Anthropic PBC (USA) übermittelt, um eine Antwort zu erzeugen. Bitte geben Sie dort keine personenbezogenen oder vertraulichen Daten ein. Zur Missbrauchsvermeidung wird Ihre IP-Adresse bis zu 24 Stunden gespeichert, um die Anzahl der Anfragen pro Tag zu begrenzen. [Rechtsgrundlage und Angaben zum Drittlandtransfer ergänzen.]</p>
+    <h2>5. Terminbuchung</h2>
+    <p>Für Terminbuchungen nutzen wir [Cal.com / Calendly]. Die Buchung erfolgt auf der Seite des Anbieters; dort gelten dessen Datenschutzbestimmungen. Ihre Angaben verwenden wir nur zur Durchführung der Sitzung (Art. 6 Abs. 1 lit. b DSGVO).</p>
+    <h2>6. Schriftarten</h2>
+    <p>Die verwendeten Schriftarten werden lokal von diesem Server geladen; es findet keine Verbindung zu Google statt.</p>
+    <h2>7. Python-Editor</h2>
+    <p>Erst wenn Sie im Python-Editor auf „Run“ klicken, wird die Python-Laufzeitumgebung (Pyodide) von jsDelivr geladen [bzw. von diesem Server, falls selbst gehostet]. Dabei wird Ihre IP-Adresse an den Anbieter übermittelt. Ihr Code wird ausschließlich in Ihrem Browser ausgeführt und nicht an uns übertragen. [Rechtsgrundlage ergänzen.]</p>
+    <h2>8. Ihre Rechte</h2>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde, z. B. dem Landesbeauftragten für den Datenschutz und die Informationsfreiheit Baden-Württemberg.</p>
+  </div></div>`;
+}
+
+function footer(){
+  return `<footer><div class="wrap"><span><span class="hand" style="font-size:22px;color:var(--ink)">AI Bridge by Ines</span> Learn • Build • Solve.</span>
+  <nav><a href="mailto:${esc(CONFIG.contactEmail)}">Contact</a><a href="#/impressum">Impressum</a><a href="#/datenschutz">Datenschutz</a></nav></div></footer>`;
+}
+
+/* =====================================================================
+   Router
+   ===================================================================== */
+let route = { name:"home" };
+function parseRoute(){
+  const h = location.hash.replace(/^#\/?/, "");
+  const [a, b] = h.split("/");
+  if (a === "learn") return { name:"learn" };
+  if (a === "editor") return { name:"editor" };
+  if (a === "lesson" && byId[b]) return { name:"lesson", id:b };
+  if (a === "impressum" || a === "datenschutz") return { name:a };
+  return { name:"home" };
+}
+function render(keepScroll){
+  const y = window.scrollY;
+  route = parseRoute();
+  const tutorOn = route.name === "learn" || route.name === "lesson" || route.name === "editor";
+  document.body.classList.toggle("with-tutor", tutorOn);
+  if (!tutorOn) document.body.classList.remove("show-tutor");
+  let html = "";
+  if (route.name === "home") html = viewHome();
+  else if (route.name === "learn") html = viewLearn();
+  else if (route.name === "lesson") { html = viewLesson(route.id); progress.last = route.id; saveProgress(); }
+  else if (route.name === "editor") html = viewEditor();
+  else html = viewLegal(route.name);
+  $("#view").innerHTML = html + footer();
+  if (route.name === "editor") setupEditor();
+  if (route.name === "lesson") addRunButtons();
+  const navKey = route.name === "lesson" ? "learn" : route.name;
+  document.querySelectorAll("[data-nav]").forEach(a => a.toggleAttribute("aria-current", a.dataset.nav === navKey));
+  document.querySelectorAll("[data-nav]").forEach(a => { if (a.hasAttribute("aria-current")) a.setAttribute("aria-current","page"); });
+  if (keepScroll) window.scrollTo(0, y); else window.scrollTo(0, 0);
+  renderCtx();
+}
+window.addEventListener("hashchange", () => render(false));
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.dataset.go){ location.hash = "#/lesson/" + t.dataset.go; return; }
+  if (t.dataset.o !== undefined && route.name === "lesson"){
+    const l = byId[route.id], qi = +t.dataset.q, oi = +t.dataset.o;
+    if (t.hasAttribute("data-extra")) extra[l.id][qi].chosen = oi;
+    else {
+      answers[l.id][qi] = oi;
+      const ans = answers[l.id];
+      if (l.quiz.every((_,i) => ans[i] !== undefined)){
+        progress.lessons[l.id] = { ...(progress.lessons[l.id]||{}), score:l.quiz.filter((q,i)=>ans[i]===q.a).length, total:l.quiz.length, at:Date.now() };
+        saveProgress();
+      }
+    }
+    return render(true);
+  }
+  if (t.id === "markDone"){
+    const r = progress.lessons[route.id] || {};
+    progress.lessons[route.id] = { ...r, done:!r.done, at:Date.now() };
+    saveProgress(); return render(true);
+  }
+  if (t.id === "genQ") return generateQuestion();
+});
+
+/* =====================================================================
+   Python editor — runs Python in the browser with Pyodide (in a worker)
+   ===================================================================== */
+const SAMPLE_FILES = {
+  "olives.csv": "id,variety,weight_g,length_mm,region\n1,Chemlali,2.1,14.2,Sfax\n2,Chemlali,2.4,15.0,Sfax\n3,Chemlali,1.9,13.6,Sfax\n4,Chemlali,2.6,15.4,Sousse\n5,Chetoui,3.8,19.1,Beja\n6,Chetoui,4.2,20.3,Beja\n7,Chetoui,3.5,18.7,Jendouba\n8,Chetoui,4.6,21.0,Beja\n9,Oueslati,4.9,21.8,Kairouan\n10,Oueslati,5.3,22.5,Kairouan\n11,Oueslati,4.4,20.9,Kairouan\n12,Zalmati,3.1,17.2,Zarzis\n13,Zalmati,2.8,16.5,Zarzis\n14,Zalmati,3.4,17.9,Medenine\n15,Picholine,4.1,23.4,Nabeul\n16,Picholine,3.9,22.8,Nabeul\n"
+};
+const EXAMPLES = {
+  hello: { label:"Hello, Python", code:`name = "AI Bridge"
+for i in range(3):
+    print(f"Hello from {name}! ({i + 1})")
+` },
+  functions: { label:"Functions and lists", code:`weights = [3.2, 4.1, 2.8, 5.0]
+
+def mean(values):
+    return sum(values) / len(values)
+
+heavy = [w for w in weights if w > 4]
+print("mean:", round(mean(weights), 2))
+print("heavy:", heavy)
+` },
+  pandas: { label:"pandas with olives.csv", code:`import pandas as pd
+
+df = pd.read_csv("olives.csv")
+print(df.head())
+print()
+print(df.groupby("variety")["weight_g"].agg(["mean", "count"]).round(2))
+` },
+  numpy: { label:"NumPy image as numbers", code:`import numpy as np
+
+# A tiny 4x4 "image" with 3 colour channels
+img = np.random.randint(0, 256, size=(4, 4, 3))
+print("shape:", img.shape)
+print("top-left pixel:", img[0, 0])
+print("normalised mean:", round((img / 255).mean(), 3))
+` },
+  error: { label:"Find the bug", code:`scores = [0.91, 0.88, "0.93", 0.90]
+
+total = 0
+for s in scores:
+    total = total + s
+
+print("average:", total / len(scores))
+` }
+};
+const ED_KEY = "aibridge-editor-code";
+let editorCode = null;
+try { editorCode = localStorage.getItem(ED_KEY); } catch(e) {}
+if (!editorCode) editorCode = EXAMPLES.hello.code;
+let lastRun = { output:"", error:"" };
+let pyWorker = null, pyReady = false, running = false;
+
+const WORKER_SRC = `
+let py = null;
+self.onmessage = async (e) => {
+  const { code, files, indexURL } = e.data;
+  try {
+    if (!py) {
+      self.postMessage({ type:"sys", text:"Loading Python (first run takes a few seconds)…" });
+      try {
+        importScripts(indexURL + "pyodide.js");
+        py = await loadPyodide({ indexURL });
+      } catch (err) { py = null; self.postMessage({ type:"loadfail", text:String(err && err.message || err) }); return; }
+      py.setStdout({ batched: (s) => self.postMessage({ type:"out", text:s + "\\n" }) });
+      py.setStderr({ batched: (s) => self.postMessage({ type:"err", text:s + "\\n" }) });
+      self.postMessage({ type:"ready" });
+    }
+    for (const [name, content] of Object.entries(files || {})) py.FS.writeFile(name, content);
+    await py.loadPackagesFromImports(code, { messageCallback: (m) => self.postMessage({ type:"sys", text:m + "\\n" }), errorCallback: (m) => self.postMessage({ type:"err", text:m + "\\n" }) });
+    const result = await py.runPythonAsync(code);
+    if (result !== undefined && result !== null) {
+      self.postMessage({ type:"out", text:String(result) + "\\n" });
+      if (result.destroy) result.destroy();
+    }
+    self.postMessage({ type:"done" });
+  } catch (err) {
+    self.postMessage({ type:"error", text:String(err && err.message || err) });
+  }
+};`;
+
+function viewEditor(){
+  return `<div class="learn-main"><div class="learn-inner pg">
+    <h1>Python editor</h1>
+    <p class="muted" style="margin:0;max-width:60ch">Write and run Python right here in your browser, nothing to install. NumPy and pandas load automatically when you import them. Stuck? Ask the tutor to explain your code or an error.</p>
+    <div class="pg-bar">
+      <label for="exampleSel" style="position:absolute;left:-9999px">Load an example</label>
+      <select id="exampleSel"><option value="">Load an example…</option>${Object.entries(EXAMPLES).map(([k,v]) => `<option value="${k}">${esc(v.label)}</option>`).join("")}</select>
+      <span class="spacer"></span>
+      <span class="kbd">Ctrl + Enter to run</span>
+      <button class="btn btn-line btn-small" type="button" id="stopPy" hidden>Stop</button>
+      <button class="btn btn-sage btn-small" type="button" id="runPy">Run</button>
+    </div>
+    <div class="editor"><div class="gutter" id="gutter" aria-hidden="true">1</div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code"></textarea></div>
+    <div class="output" id="output" role="log" aria-live="polite"><span class="sys">Output appears here.</span></div>
+    <div class="out-actions"><button class="btn btn-line btn-small" type="button" id="askPy">Ask the tutor about my code</button><button class="btn btn-line btn-small" type="button" id="clearOut">Clear output</button></div>
+    <p class="files-note">Sample file available to your code: <code>olives.csv</code> (olive measurements). Your code is saved in this browser.</p>
+  </div></div>`;
+}
+
+function setupEditor(){
+  const ta = $("#code"), gutter = $("#gutter");
+  ta.value = editorCode;
+  const lines = () => { const n = ta.value.split("\n").length; gutter.textContent = Array.from({length:n}, (_,i) => i+1).join("\n"); gutter.scrollTop = ta.scrollTop; };
+  lines();
+  ta.addEventListener("scroll", () => { gutter.scrollTop = ta.scrollTop; });
+  ta.addEventListener("input", () => { editorCode = ta.value; lines(); try { localStorage.setItem(ED_KEY, editorCode); } catch(e) {} });
+  ta.addEventListener("keydown", e => {
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); runPython(); return; }
+    if (e.key === "Tab" && !e.shiftKey) { e.preventDefault(); insertText(ta, "    "); return; }
+    if (e.key === "Enter") {
+      const before = ta.value.slice(0, ta.selectionStart);
+      const line = before.slice(before.lastIndexOf("\n") + 1);
+      let indent = line.match(/^\s*/)[0];
+      if (/:\s*$/.test(line)) indent += "    ";
+      e.preventDefault(); insertText(ta, "\n" + indent);
+    }
+  });
+  $("#exampleSel").onchange = e => { const ex = EXAMPLES[e.target.value]; if (!ex) return; ta.value = ex.code; ta.dispatchEvent(new Event("input")); e.target.value = ""; ta.focus(); };
+  $("#runPy").onclick = runPython;
+  $("#stopPy").onclick = stopPython;
+  $("#clearOut").onclick = () => { $("#output").innerHTML = ""; lastRun = { output:"", error:"" }; };
+  $("#askPy").onclick = () => askAboutCode();
+}
+function insertText(ta, text){
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  ta.setRangeText(text, s, e, "end");
+  ta.dispatchEvent(new Event("input"));
+}
+function outAppend(text, cls){
+  const o = $("#output"); if (!o) return;
+  const span = document.createElement("span"); if (cls) span.className = cls; span.textContent = text;
+  o.appendChild(span); o.scrollTop = o.scrollHeight;
+}
+function setRunning(on){
+  running = on;
+  if ($("#runPy")) { $("#runPy").disabled = on; $("#runPy").textContent = on ? "Running…" : "Run"; }
+  if ($("#stopPy")) $("#stopPy").hidden = !on;
+}
+function makeWorker(){
+  const w = new Worker(URL.createObjectURL(new Blob([WORKER_SRC], { type:"text/javascript" })));
+  w.onmessage = e => {
+    const m = e.data;
+    if (m.type === "out") { lastRun.output += m.text; outAppend(m.text); }
+    else if (m.type === "err") { lastRun.output += m.text; outAppend(m.text, "err"); }
+    else if (m.type === "sys") outAppend(m.text + (m.text.endsWith("\n") ? "" : "\n"), "sys");
+    else if (m.type === "ready") pyReady = true;
+    else if (m.type === "loadfail") { outAppend("Python couldn't be loaded. Check your internet connection and run again. (Inside the Claude preview, the Python runtime may be blocked; on your own site it loads normally.)\n", "err"); console.warn("Pyodide load failed:", m.text); setRunning(false); w.terminate(); pyWorker = null; }
+    else if (m.type === "error") { m.text = cleanTraceback(m.text); lastRun.error = m.text; outAppend(m.text + "\n", "err"); setRunning(false); showErrorHelp(); }
+    else if (m.type === "done") { outAppend("\n✓ Finished\n", "sys"); setRunning(false); }
+  };
+  w.onerror = () => { outAppend("Python couldn't start here. On your own AI Bridge site it runs normally; check your internet connection.\n", "err"); setRunning(false); pyWorker = null; };
+  return w;
+}
+function cleanTraceback(t){
+  const out = []; let skip = false;
+  for (const ln of t.split("\n")) {
+    if (/^\s*File "\/lib\//.test(ln)) { skip = true; continue; }
+    if (/^\s*File /.test(ln)) { skip = false; out.push(ln); continue; }
+    if (skip && /^\s{2,}/.test(ln)) continue;
+    skip = false; out.push(ln);
+  }
+  return out.join("\n").trim();
+}
+function runPython(){
+  if (running) return;
+  const code = $("#code").value;
+  $("#output").innerHTML = ""; lastRun = { output:"", error:"" };
+  try { if (!pyWorker) pyWorker = makeWorker(); }
+  catch(e) { outAppend("Python couldn't start in this view. It works on your own AI Bridge site.\n", "err"); return; }
+  setRunning(true);
+  pyWorker.postMessage({ code, files:SAMPLE_FILES, indexURL:new URL(CONFIG.pyodideUrl, location.href).href });
+}
+function stopPython(){
+  if (pyWorker) pyWorker.terminate();
+  pyWorker = null; pyReady = false;
+  outAppend("\n■ Stopped. (Python restarts on the next run.)\n", "sys");
+  setRunning(false);
+}
+function showErrorHelp(){
+  const o = $("#output"); if (!o) return;
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "btn btn-sage btn-small"; b.style.marginTop = "10px"; b.textContent = "Ask the tutor about this error";
+  b.onclick = () => askAboutCode(true);
+  o.appendChild(document.createElement("br")); o.appendChild(b); o.scrollTop = o.scrollHeight;
+}
+function askAboutCode(isError){
+  document.body.classList.add("show-tutor");
+  send(isError || lastRun.error ? "My code raised an error. Help me understand what went wrong and how to fix it. Don't just give me the full fixed code; guide me first." : "Explain what my code does, step by step, and suggest one improvement.");
+}
+function addRunButtons(){
+  document.querySelectorAll(".prose pre[data-run]").forEach(pre => {
+    const bar = document.createElement("div"); bar.className = "runbar";
+    const b = document.createElement("button"); b.type = "button"; b.className = "btn btn-line btn-small"; b.textContent = "Run this in the editor";
+    b.onclick = () => { editorCode = pre.textContent.replace(/\n+$/,"") + "\n"; try { localStorage.setItem(ED_KEY, editorCode); } catch(e) {} location.hash = "#/editor"; };
+    bar.appendChild(b); pre.after(bar);
+  });
+}
+
+/* =====================================================================
+   Tutor — works inside Claude (preview) and on your own site (/api/tutor)
+   ===================================================================== */
+const Tutor = {
+  mode:"pending", sample:null,
+  async init(){
+    if (window.claude && typeof window.claude.use === "function"){
+      try { const s = await window.claude.use("sample"); if (s){ this.sample = s; this.mode = "claude"; return; } } catch(e) {}
+    }
+    this.mode = "api";
+  },
+  async chat(turns, { onText, signal } = {}){
+    if (this.mode === "claude"){
+      const r = await this.sample(turns, { cache:false, signal, onText });
+      return r;
+    }
+    const merged = [];
+    for (const t of turns){ const last = merged[merged.length-1]; if (last && last.role === t.role) last.content += "\n\n" + t.content; else merged.push({ ...t }); }
+    let res;
+    try {
+      res = await fetch(CONFIG.tutorEndpoint, { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ messages:merged }), signal });
+    } catch(e) { throw { code: e.name === "AbortError" ? "cancelled" : "offline" }; }
+    if (!res.ok){
+      let code = "failed";
+      if (res.status === 429) code = "rate_limited";
+      else if (res.status === 404 || res.status === 405 || res.status === 503) code = "not_setup";
+      else if (res.status === 413) code = "prompt_too_large";
+      throw { code };
+    }
+    const d = await res.json();
+    onText && onText({ text:d.text, delta:d.text });
+    return { text:d.text, truncated:!!d.truncated };
+  },
+  async json(prompt){
+    if (this.mode === "claude") return this.sample.json(prompt, { cache:false });
+    const { text } = await this.chat([{ role:"user", content:prompt }]);
+    const m = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+    const src = m ? m[1] : text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
+    try { return JSON.parse(src); } catch(e) { throw { code:"invalid_json" }; }
+  }
+};
+
+const LEVELS = { beginner:"a complete beginner (avoid jargon, use everyday analogies)", student:"a university student (clear and practical)", researcher:"a researcher (precise, can reference methods and trade-offs)" };
+const ERR = {
+  not_granted:"The tutor needs your permission to answer. Reload the page to be asked again.",
+  rate_limited:"The tutor has answered a lot of questions today. Try again later, or bring your question to a session.",
+  prompt_too_large:"That question is too long. Shorten it and send again.",
+  not_setup:"The tutor isn't switched on yet on this site.",
+  offline:"You seem to be offline. Check your connection and send again."
+};
+let turns = [], busy = false, ctl = null;
+
+function lessonText(l){ const d = document.createElement("div"); d.innerHTML = l.body; return d.textContent.trim(); }
+function renderCtx(){
+  const l = route.name === "lesson" ? byId[route.id] : null;
+  const ed = route.name === "editor";
+  $("#ctx").innerHTML = l ? `Reading along with <b>${esc(l.title)}</b>` : ed ? `Looking at the code in your <b>Python editor</b>` : `General questions, or open a lesson for focused help`;
+  const chips = l ? ["Explain this more simply","Give me a real-world example","What's a common mistake here?"] : ed ? ["Explain my code","Give me a small exercise","How can I make this cleaner?"] : ["Where should I start?","How do these courses connect?","Make me a 2-week study plan"];
+  $("#chips").innerHTML = Tutor.mode === "pending" ? "" : chips.map(c => `<button class="chip" type="button">${esc(c)}</button>`).join("");
+  $("#input").placeholder = l ? "Ask about this lesson…" : ed ? "Ask about your code…" : "Ask anything about the courses…";
+}
+$("#chips").addEventListener("click", e => { const c = e.target.closest(".chip"); if (c && !busy) send(c.textContent); });
+
+function md(s){
+  let h = esc(s); const blocks = [];
+  h = h.replace(/```[\w-]*\n?([\s\S]*?)```/g, (_,c) => { blocks.push(`<pre><code>${c.replace(/\n$/,"")}</code></pre>`); return `\u0000${blocks.length-1}\u0000`; });
+  h = h.replace(/`([^`\n]+)`/g,"<code>$1</code>").replace(/\*\*([^*\n]+)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>");
+  return h.replace(/\u0000(\d+)\u0000/g, (_,i) => blocks[+i]);
+}
+function addMsg(role, html){ const d = document.createElement("div"); d.className = "msg " + role; d.innerHTML = html; $("#msgs").appendChild(d); $("#msgs").scrollTop = $("#msgs").scrollHeight; return d; }
+function tutorIntro(){
+  $("#msgs").innerHTML = "";
+  addMsg("note", Tutor.mode === "pending" ? "Connecting to the tutor…" : "Ask a question in your own words. Answers adapt to the level you pick above. Please don't share personal or confidential information.");
+}
+function rules(){
+  const l = route.name === "lesson" ? byId[route.id] : null;
+  const ed = route.name === "editor";
+  const edCtx = `The learner is in the browser Python editor (Pyodide; numpy and pandas available; sample file olives.csv with columns id, variety, weight_g, length_mm, region). Their current code:\n\`\`\`python\n${(editorCode||"").slice(0,6000)}\n\`\`\`\nLast output:\n"""\n${lastRun.output.slice(-2500)}\n"""\n${lastRun.error ? "Last error:\n\"\"\"\n" + lastRun.error.slice(-2500) + "\n\"\"\"" : "No error on the last run."}\nWhen helping with bugs, guide the learner to find the fix before giving full corrected code.`;
+  const ctx = ed ? edCtx : l ? `The learner is reading the lesson "${l.title}" from the course "${l.course.title}". Lesson text:\n"""\n${lessonText(l).slice(0,6000)}\n"""`
+                : `The learner is on the learning path overview. Courses: ${COURSES.map(c => c.title + " (" + c.lessons.map(x=>x.title).join(", ") + ")").join("; ")}.`;
+  return `You are the tutor on "AI Bridge by Ines", a learning site where Ines offers 1-to-1 sessions and free lessons in Python, AI, machine learning, computer vision, LLMs, software and research methodology. Explain for ${LEVELS[$("#level").value]}.\n${ctx}\nAnswer concisely (under 180 words unless asked for more). Use short code examples when they help. When useful, end with one short question that checks understanding. If the learner is stuck on their own project, you may mention that a 1-to-1 session with Ines can help, at most once per conversation. Format: plain text with **bold**, \`inline code\` and fenced code blocks only; no headings or tables.`;
+}
+
+async function send(text){
+  text = (text||"").trim();
+  if (!text || busy || Tutor.mode === "pending") return;
+  $("#input").value = ""; autosize();
+  addMsg("user", esc(text)); turns.push({ role:"user", content:text });
+  const bubble = addMsg("bot", "Thinking…");
+  busy = true; $("#sendBtn").disabled = true; $("#stopBtn").hidden = false;
+  ctl = new AbortController();
+  try {
+    const recent = turns.slice(-12); if (recent[0].role !== "user") recent.shift();
+    const { text:answer, truncated } = await Tutor.chat([{ role:"user", content:rules() }, ...recent], {
+      signal:ctl.signal, onText:({ text }) => { bubble.innerHTML = md(text); $("#msgs").scrollTop = $("#msgs").scrollHeight; }
+    });
+    bubble.innerHTML = md(answer) + (truncated ? "<br><em>(Answer cut short. Ask for one part at a time.)</em>" : "");
+    turns.push({ role:"assistant", content:answer });
+  } catch(e) {
+    if (e && e.text){ bubble.innerHTML = md(e.text); turns.push({ role:"assistant", content:e.text }); } else bubble.remove();
+    if (!e || e.code !== "cancelled") addMsg("note", ERR[e && e.code] || "The tutor couldn't answer. Send your question again.");
+  } finally { busy = false; $("#sendBtn").disabled = false; $("#stopBtn").hidden = true; }
+}
+$("#sendBtn").onclick = () => send($("#input").value);
+$("#stopBtn").onclick = () => ctl && ctl.abort();
+$("#input").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); send($("#input").value); } });
+function autosize(){ const t = $("#input"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight,140) + "px"; }
+$("#input").addEventListener("input", autosize);
+$("#clearChat").onclick = () => { if (busy && ctl) ctl.abort(); turns = []; tutorIntro(); };
+$("#tutorFab").onclick = () => { document.body.classList.add("show-tutor"); setTimeout(() => $("#input").focus(), 200); };
+$("#closeTutor").onclick = () => document.body.classList.remove("show-tutor");
+$("#backdrop").onclick = () => document.body.classList.remove("show-tutor");
+document.addEventListener("keydown", e => { if (e.key === "Escape") document.body.classList.remove("show-tutor"); });
+
+async function generateQuestion(){
+  const l = byId[route.id], st = $("#genStatus"), btn = $("#genQ");
+  if (Tutor.mode === "pending"){ st.textContent = "The tutor is still connecting. Try again in a moment."; return; }
+  btn.disabled = true; st.textContent = "Writing a question…";
+  const existing = [...l.quiz, ...(extra[l.id]||[])].map(q => "- " + q.q).join("\n");
+  try {
+    const r = await Tutor.json(`Write ONE new multiple-choice question that tests understanding of the lesson below, for ${LEVELS[$("#level").value]}.
+Avoid repeating these questions:
+${existing}
+Reply with only JSON like {"q":"question","options":["A","B","C","D"],"answer":0,"explain":"one sentence why"}. Exactly 4 options; answer is the index of the correct option.
+Lesson "${l.title}":
+"""
+${lessonText(l).slice(0,6000)}
+"""`);
+    if (!r || typeof r.q !== "string" || !Array.isArray(r.options) || r.options.length < 2 || !Number.isInteger(r.answer) || r.answer < 0 || r.answer >= r.options.length) throw { code:"invalid_json" };
+    (extra[l.id] = extra[l.id] || []).push({ q:r.q, o:r.options.map(String), a:r.answer, e:String(r.explain||"") });
+    if (route.name === "lesson" && route.id === l.id) render(true);
+  } catch(e) {
+    if (route.name === "lesson" && route.id === l.id && $("#genStatus")){
+      $("#genStatus").textContent = ERR[e && e.code] || "The tutor couldn't write a question this time. Try again.";
+      $("#genQ").disabled = false;
+    }
+  }
+}
+
+/* Boot */
+render(false);
+tutorIntro();
+Tutor.init().then(() => { tutorIntro(); renderCtx(); });
+</script>
+</body>
+</html>
